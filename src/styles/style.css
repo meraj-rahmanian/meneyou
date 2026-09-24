@@ -7,10 +7,32 @@ body {
     min-height: 100vh;
 }
 
+/* ===== جلوگیری از بیرون‌زدگی صفحه در موبایل ===== */
+html {
+    overflow-x: hidden;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* حاشیه‌ی راست هم‌اندازه‌ی حاشیه‌ی چپ (ml-5) */
+#scroll-container {
+    margin-right: 1.25rem;
+}
+
 .navar {
     background-color: #020B0E;
 }
 
+/*==========================
+Header Style 
+============================ */
+
+.header-style {
+    color: #08B9BE;
+}
 
 /* =========================
    Navbar
