@@ -1,0 +1,177 @@
+/* =========================
+   MeneYou Background
+   ========================= */
+
+body {
+    background-color: #020B0E;
+    min-height: 100vh;
+}
+
+.navar {
+    background-color: #020B0E;
+}
+
+
+/* =========================
+   Navbar
+   ========================= */
+
+.navbar {
+    background-color: rgba(4, 20, 24, 0.78);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(8, 185, 190, 0.20);
+    
+
+    border-radius: 16px;
+}
+
+
+/* =========================
+   Calculator
+   ========================= */
+
+.cal_stayle {
+    background-color: rgba(4, 27, 30, 0.88);
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    border: 1px solid rgba(8, 185, 190, 0.22);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================
+   Calculator Display
+   ========================= */
+
+.cal_display {
+    background-color: rgba(1, 15, 18, 0.72);
+
+    border: 1px solid rgba(8, 185, 190, 0.10);
+
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================
+   Calculator Keys
+   ========================= */
+
+.cal_key {
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(8, 185, 190, 0.12);
+
+    border-radius: 10px;
+
+    background-color: rgba(8, 185, 190, 0.075);
+
+    color: #E8FFFF;
+
+    font-size: 26px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================
+   Operators
+   ========================= */
+
+.cal_operator {
+    height: 42px;
+
+    color: #08B9BE;
+
+    font-size: 28px;
+
+    background-color: rgba(8, 185, 190, 0.10);
+}
+
+
+/* =========================
+   Actions
+   ========================= */
+
+.cal_action {
+    color: #08B9BE;
+}
+
+
+/* =========================
+   Equal
+   ========================= */
+
+.cal_equal {
+    height: 116px;
+
+    color: #031214;
+
+    background-color: #08B9BE;
+
+    border-color: rgba(8, 185, 190, 0.7);
+
+    box-shadow:
+        0 4px 16px rgba(8, 185, 190, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+}
+.cal_display {
+    color: #E8FFFF;
+    font-size: 28px;
+    font-weight: 500;
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.navitems a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+}
+
+.items_on a {
+    background-color: #08B9BE;
+    border-radius: 12px;
+}
+
+.items_on svg {
+    color: black;
+}
+
+.menuOn {
+    background-color: #08B9BE;
+    border-radius: 12px;
+}
+.menuOn svg {
+    color: black;
+}
+.cal_displayN {
+    color: #E8FFFF;
+    font-size: 16px;
+    font-weight: 450;
+    padding: 7px;
+    padding-bottom: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+}

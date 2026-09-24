@@ -1,0 +1,509 @@
+@keyframes moveLight {
+    from {
+        transform: translate(0px, 0px);
+    }
+
+    to {
+        transform: translate(45px, -40px);
+    }
+}
+
+@keyframes auroraMove {
+    from {
+        transform: translate(-40px, -30px) scale(1);
+    }
+
+    to {
+        transform: translate(60px, 40px) scale(1.1);
+    }
+}
+
+
+/* ===== Fonts ===== */
+
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("./font/Inter_18pt-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+.font-Inter {
+    font-family: "Inter", sans-serif;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+    background-color: rgba(3, 18, 22, 0.75);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgb(2, 255, 245);
+    border-radius: 16px;
+
+    /* Navbar initial state */
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-20px)
+        scale(0.97);
+
+    transition:
+        opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+        visibility 0s linear 0.45s;
+}
+
+
+/* ===== Navbar Open ===== */
+
+.navbar.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    transition:
+        opacity 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+        visibility 0s;
+}
+
+
+/* =========================================================
+   NAV ITEMS
+   ========================================================= */
+
+.navitems {
+    opacity: 0;
+
+    transform: translateX(25px);
+
+    transition:
+        opacity 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    /* مقدار توسط JavaScript تعیین می‌شود */
+    transition-delay: 0s;
+}
+
+
+/* ===== Items Open Animation ===== */
+
+.navbar.show .navitems {
+    opacity: 1;
+
+    transform: translateX(0);
+
+    transition-delay: var(--item-delay);
+}
+
+
+/* ===== Items Closing ===== */
+
+.navbar:not(.show) .navitems {
+    transition-delay: 0s;
+}
+
+
+/* ===== Nav Item Link ===== */
+
+.navitems a {
+    transition: transform 0.15s ease;
+}
+
+.navitems:active a {
+    transform: scale(0.85);
+}
+
+
+/* =========================================================
+   FADE UP
+   ========================================================= */
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    animation:
+        fadeUp 0.7s
+        cubic-bezier(0.22, 0.61, 0.36, 1)
+        forwards;
+}
+
+
+/* =========================================================
+   SCROLL ANIMATION
+   ========================================================= */
+
+@keyframes scrollFadeInLeft {
+    0% {
+        opacity: 0;
+        transform:
+            translateX(-100px)
+            translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateX(0)
+            translateY(0);
+    }
+}
+
+.scroll-item {
+    opacity: 0;
+
+    transform:
+        translateX(-100px)
+        translateY(20px);
+
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.scroll-item.visible {
+    opacity: 1;
+
+    transform:
+        translateX(0)
+        translateY(0);
+}
+
+
+/* =========================================================
+   TYPING ANIMATION DOT
+   ========================================================= */
+
+.typing-dot {
+    display: inline-block;
+
+    width: 6px;
+    height: 6px;
+
+    margin-left: 2px;
+
+    border-radius: 50%;
+
+    background-color: #10a7ac;
+
+    vertical-align: middle;
+
+    animation:
+        typingDotBlink 0s ease-in-out infinite;
+}
+
+@keyframes typingDotBlink {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.25;
+        transform: scale(0.7);
+    }
+}
+
+
+/* =========================================================
+   BOTTOM CLICK ANIMATION
+   Nav Items + All Buttons
+   ========================================================= */
+
+.bottom_click {
+    position: relative;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    transition: transform 0.15s ease;
+}
+
+
+/* Bottom Fill */
+
+.bottom_click::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 0%;
+
+    background:
+        linear-gradient(
+            0deg,
+            rgba(16, 167, 172, 0.55) 0%,
+            rgba(16, 167, 172, 0.15) 100%
+        );
+
+    border-radius: inherit;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    transition: none;
+}
+
+
+/* Keep Content Above Effect */
+
+.bottom_click > * {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* Click */
+
+.bottom_click:active {
+    transform: scale(0.94);
+}
+
+
+/* Click In */
+
+.bottom_click.clicked::after {
+    height: 100%;
+
+    opacity: 1;
+
+    transition:
+        height 0.4s
+        cubic-bezier(0.22, 0.61, 0.36, 1),
+
+        opacity 0.5s ease 0.15s;
+}
+
+
+/* Click Out */
+
+.bottom_click.clicked-out::after {
+    height: 100%;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.35s ease;
+}
+
+
+/* =========================================================
+   BUTTON CLICK ANIMATION
+   ========================================================= */
+
+.btn-click {
+    position: relative;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    transition:
+        all 0.2s
+        cubic-bezier(0.4, 0, 0.2, 1);
+
+    transform-origin: center;
+}
+
+
+/* Button Press */
+
+.btn-click:active {
+    transform: scale(0.92);
+
+    box-shadow:
+        0 4px 12px
+        rgba(6, 197, 200, 0.3);
+}
+
+
+/* =========================================================
+   RIPPLE EFFECT
+   ========================================================= */
+
+.btn-click::before {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 0;
+    height: 0;
+
+    background:
+        rgba(255, 255, 255, 0.4);
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    opacity: 0;
+
+    transition:
+        all 0.6s
+        cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* Ripple Active */
+
+.btn-click:active::before {
+    width: 300px;
+    height: 300px;
+
+    opacity: 0.6;
+}
+
+
+/* =========================================================
+   BUTTON BOTTOM SHINE
+   ========================================================= */
+
+.btn-click::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(6, 197, 200, 0.35),
+            transparent
+        );
+
+    transition:
+        height 0.4s ease;
+
+    z-index: 0;
+}
+
+
+.btn-click:active::after {
+    height: 60%;
+}
+
+
+/* =========================================================
+   CALCULATOR KEYS
+   ========================================================= */
+
+.cal_key {
+    transition:
+        transform 0.1s ease,
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* ===== Hover ===== */
+
+.cal_key:hover {
+    background:
+        rgba(8, 185, 190, 0.15);
+
+    border-color:
+        rgba(8, 185, 190, 0.28);
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.05),
+
+        0 4px 12px
+        rgba(8, 185, 190, 0.08);
+}
+
+
+/* ===== Click ===== */
+
+.cal_key:active {
+    transform: scale(0.93);
+
+    background:
+        rgba(8, 185, 190, 0.27);
+
+    border-color:
+        rgba(8, 185, 190, 0.4);
+
+    box-shadow:
+        inset 0 2px 5px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   EQUAL BUTTON
+   ========================================================= */
+
+
+/* ===== Equal Hover ===== */
+
+.cal_equal:hover {
+    background: #10C9CC;
+
+    box-shadow:
+        0 6px 18px
+        rgba(8, 185, 190, 0.25),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.25);
+}
+
+
+/* ===== Equal Click ===== */
+
+.cal_equal:active {
+    transform: scale(0.94);
+
+    background: #079FA3;
+
+    box-shadow:
+        inset 0 3px 7px
+        rgba(0, 0, 0, 0.25);
+}
