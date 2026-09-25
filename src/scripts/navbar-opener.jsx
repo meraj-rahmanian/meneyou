@@ -52,7 +52,7 @@ function Navbar() {
         {/* دکمه همبرگری */}
         <button
           onClick={toggleMenu}
-          className={`flex justify-center items-center cursor-pointer ${
+          className={`flex w-10 h-10 justify-center items-center cursor-pointer ${
             menuOpen ? "items_on" : ""
           }`}
           id="Bars"
@@ -63,7 +63,7 @@ function Navbar() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className={`size-6 ${menuOpen ? "text-black" : "text-white"}`}
+            className={`size-7 bars ${menuOpen ? "menuOn text-black" : "text-white"}`}
           >
             <path
               strokeLinecap="round"

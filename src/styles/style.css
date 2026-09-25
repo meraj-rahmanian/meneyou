@@ -188,6 +188,23 @@ Header Style
 .menuOn svg {
     color: black;
 }
+#Bars {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Bars.items_on {
+    background-color: #08B9BE;
+    border-radius: 12px;
+}
+
+#Bars.items_on svg {
+    color: black;
+}
 .cal_displayN {
     color: #E8FFFF;
     font-size: 16px;

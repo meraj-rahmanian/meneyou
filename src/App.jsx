@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Calculator from "./components/Calculator/Calculator";
-import Navbar from "./components/Navbar";
+import Navbar from "./scripts/navbar-opener";
 
 function App() {
     const [cal_opener, setCal_opener] = useState(false);
