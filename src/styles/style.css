@@ -44,11 +44,20 @@ Header Style
     backdrop-filter: blur(10px);
 
     border: 1px solid rgba(8, 185, 190, 0.20);
-    
 
     border-radius: 16px;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
+.navbar.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
 
 /* =========================
    Calculator

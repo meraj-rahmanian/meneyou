@@ -14,7 +14,7 @@ import "./styles/style.css";
 /* ---------- Vanilla JS features ---------- */
 import "./scripts/loader.js";
 import "./scripts/bottom-click.js";
-import "./scripts/navbar-opener.jsx";
+import "./components/navbar-opener.jsx";
 import "./scripts/scroll-animation.js";
 import "./scripts/typing-animation.js";
 
