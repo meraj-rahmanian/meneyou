@@ -118,9 +118,7 @@ function Navbar() {
         </span>
       </div>
 
-      {/* نکته: "relative" از این دیو حذف شد تا containing block اشتباه نشه
-          و کشوی absolute نسبت به کل هدر (که fixed و در نتیجه positioned هست)
-          محاسبه بشه، نه نسبت به این باکس کوچیک دور آیکون‌ها. */}
+      
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           {outerItems.map((item) => (
