@@ -91,8 +91,8 @@ function Navbar() {
   };
 
   const visibleCount = getVisibleCount();
-  const outerItems = ITEMS.slice(0, visibleCount);
-  const drawerItems = ITEMS.slice(visibleCount);
+  const outerItems = ITEMS.slice(ITEMS.length - visibleCount);
+  const drawerItems = ITEMS.slice(0, ITEMS.length - visibleCount);
 
   return (
     <div className="animate-fade-up fixed top-0 left-0 w-full flex justify-between items-center p-3 z-50 navar">
@@ -118,7 +118,6 @@ function Navbar() {
         </span>
       </div>
 
-      
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           {outerItems.map((item) => (
@@ -126,7 +125,7 @@ function Navbar() {
               key={item.id}
               onClick={(e) => handleAction(e, item)}
               className={`p-2 rounded-xl transition ${
-                activeItem === item.id ? "items_on bg-white/10" : ""
+                activeItem === item.id ? "items_on items_on_btn" : ""
               }`}
             >
               <svg
@@ -170,12 +169,12 @@ function Navbar() {
 
         {drawerItems.length > 0 && (
           <nav
-            className={`absolute top-full right-3 margin-top mt-6 navbar flex flex-col justify-between gap-11 w-10 h-80 items-center ${
+            className={`absolute top-full right-3 margin-top mt-6 navbar flex flex-col justify-start gap-3 w-10 h-auto py-3 items-center ${
               menuOpen ? "show" : ""
             }`}
             id="navbar"
           >
-            <ul className="flex flex-col h-full justify-between p-3 items-center">
+            <ul className="flex flex-col gap-3 items-center">
               {drawerItems.map((item, index) => (
                 <li
                   key={item.id}

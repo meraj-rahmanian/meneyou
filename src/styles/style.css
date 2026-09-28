@@ -223,3 +223,12 @@ Header Style
     white-space: nowrap;
     overflow: hidden;
 }
+.items_on svg {
+    color: black;
+}
+
+/* ⬇️ این بلوک جدید رو اضافه کن */
+.items_on_btn {
+    background-color: #08B9BE;
+    border-radius: 12px;
+}

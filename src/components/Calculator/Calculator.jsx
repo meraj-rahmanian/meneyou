@@ -48,7 +48,7 @@ function Calculator({ closeCalculator }) {
       </div>
 
       {/* Expression */}
-      <div className="w-full h-[52px] bg-[#05636640] rounded mb-3 cal_display">
+      <div className="w-full h-[52px] flex items-center bg-[#05636640] rounded mb-3 cal_display">
         {namaish}
       </div>
 
