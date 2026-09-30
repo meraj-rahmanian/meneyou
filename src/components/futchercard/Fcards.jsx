@@ -21,40 +21,57 @@ export default function Fcards() {
     return () => el.removeEventListener('wheel', onWheel);
   }, []);
 
-  
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
+  // ۲. اتو اسکرول با requestAnimationFrame
+  // ۲. اتو اسکرول رفت و برگشتی (بدون تلپورت)
+useEffect(() => {
+  const el = scrollRef.current;
+  if (!el) return;
 
-    let intervalId = null;
+  let rafId = null;
+  let paused = false;
+  let position = el.scrollLeft;
+  let direction = 1; // 1 = رفت، -1 = برگشت
+  let last = performance.now();
+  const speed = 40; // پیکسل در ثانیه
 
-    const startAutoScroll = () => {
-      intervalId = setInterval(() => {
-        
-        const isEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
-        if (isEnd) {
-          el.scrollLeft = 0;
-        } else {
-          el.scrollLeft += 1.5; 
-        }
-      }, 25); 
-    };
+  const tick = (now) => {
+    const dt = (now - last) / 1000;
+    last = now;
 
-    const stopAutoScroll = () => {
-      if (intervalId) clearInterval(intervalId);
-    };
+    if (!paused) {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      position += direction * speed * dt;
 
-    startAutoScroll();
+      if (position >= maxScroll) {
+        position = maxScroll;
+        direction = -1; // رسید به آخر، برگرد
+      } else if (position <= 0) {
+        position = 0;
+        direction = 1; // رسید به اول، دوباره برو جلو
+      }
 
-    el.addEventListener('mouseenter', stopAutoScroll);
-    el.addEventListener('mouseleave', startAutoScroll);
+      el.scrollTo({ left: position, behavior: 'instant' });
+    }
+    rafId = requestAnimationFrame(tick);
+  };
 
-    return () => {
-      stopAutoScroll();
-      el.removeEventListener('mouseenter', stopAutoScroll);
-      el.removeEventListener('mouseleave', startAutoScroll);
-    };
-  }, []);
+  const pause = () => { paused = true; };
+  const resume = () => {
+    position = el.scrollLeft;
+    last = performance.now();
+    paused = false;
+  };
+
+  rafId = requestAnimationFrame(tick);
+  el.addEventListener('mouseenter', pause);
+  el.addEventListener('mouseleave', resume);
+
+  return () => {
+    cancelAnimationFrame(rafId);
+    el.removeEventListener('mouseenter', pause);
+    el.removeEventListener('mouseleave', resume);
+  };
+}, []);
 
   const items = [
     {
@@ -126,9 +143,10 @@ export default function Fcards() {
   ];
 
   return (
-    <div 
+    <div
       ref={scrollRef}
-      className="flex flex-row flex-nowrap overflow-x-auto scroll-smooth gap-5 p-5 w-full"
+      style={{ scrollBehavior: 'auto', scrollSnapType: 'none' }}
+      className="flex flex-row flex-nowrap overflow-x-auto gap-5 p-5 w-full"
     >
       {items.map(item => (
         <div key={item.id} className='cards'>
