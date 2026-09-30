@@ -1,19 +1,60 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import "./Fcard-styal.css";
 import { createRoot } from 'react-dom/client';
 
 export default function Fcards() {
   const scrollRef = useRef(null);
 
- 
-  const handleWheel = (e) => {
-    if (scrollRef.current) {
+  // ۱. تبدیل اسکرول عمودی موس به اسکرول افقی کارت‌ها (بدون حرکت عمودی صفحه)
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
 
-      e.preventDefault();
-      
-      scrollRef.current.scrollLeft += e.deltaY;
-    }
-  };
+    const onWheel = (e) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let intervalId = null;
+
+    const startAutoScroll = () => {
+      intervalId = setInterval(() => {
+        
+        const isEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 5;
+        if (isEnd) {
+          el.scrollLeft = 0;
+        } else {
+          el.scrollLeft += 1.5; 
+        }
+      }, 25); 
+    };
+
+    const stopAutoScroll = () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+
+    startAutoScroll();
+
+    el.addEventListener('mouseenter', stopAutoScroll);
+    el.addEventListener('mouseleave', startAutoScroll);
+
+    return () => {
+      stopAutoScroll();
+      el.removeEventListener('mouseenter', stopAutoScroll);
+      el.removeEventListener('mouseleave', startAutoScroll);
+    };
+  }, []);
 
   const items = [
     {
@@ -65,7 +106,7 @@ export default function Fcards() {
       svg: (
         <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <title>Settings & Customization</title>
-          <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+          <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/>
         </svg>
       ),
       title: "Theme & Customization",
@@ -87,7 +128,6 @@ export default function Fcards() {
   return (
     <div 
       ref={scrollRef}
-      onWheel={handleWheel}
       className="flex flex-row flex-nowrap overflow-x-auto scroll-smooth gap-5 p-5 w-full"
     >
       {items.map(item => (
