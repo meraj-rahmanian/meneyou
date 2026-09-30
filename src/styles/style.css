@@ -44,11 +44,20 @@ Header Style
     backdrop-filter: blur(10px);
 
     border: 1px solid rgba(8, 185, 190, 0.20);
-    
 
     border-radius: 16px;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
+.navbar.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
 
 /* =========================
    Calculator
@@ -188,6 +197,23 @@ Header Style
 .menuOn svg {
     color: black;
 }
+#Bars {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Bars.items_on {
+    background-color: #08B9BE;
+    border-radius: 12px;
+}
+
+#Bars.items_on svg {
+    color: black;
+}
 .cal_displayN {
     color: #E8FFFF;
     font-size: 16px;
@@ -196,4 +222,12 @@ Header Style
     padding-bottom: 20px;
     white-space: nowrap;
     overflow: hidden;
+}
+.items_on svg {
+    color: black;
+}
+
+.items_on_btn {
+    background-color: #08B9BE;
+    border-radius: 12px;
 }
